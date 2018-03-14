@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+    <style type = "text/css">
+        
+        body {
+            padding: 0; margin: 0;
+            font-size: 8pt;
+        }
+        
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }    
+      </style>
+      
+    <script src="../p5.js"></script>
+    <script src="../p5.dom.js"></script>
+    <script src="../p5.sound.js"></script>
+    <script src="unmatchedBracketChecker.js"></script>
+    
+  </head>
+    
+  <body>
+      
+      <div style = "text-align: center">
+      
+          <p style = "font-size:24pt">Mismatched Brackets Checker</p>
+          
+          <textarea rows="20" cols = "100" id="textbox" style = "font-size: 8pt" onclick = "this.select()">())[[]</textarea>
+<!--          Enter your code here, on separate lines-->
+          <p></p>
+          
+          <button class = "button" onclick = "checkForUnmatchedBrackets()">Find Unmatched Brackets</button>
+          
+          <p></p>
+          
+          <p id="errorP" style = "font-size: 12pt"></p>
+          
+      </div>
+      
+  </body>
+</html>
