@@ -11,7 +11,7 @@ function checkForUnmatchedBrackets() {
     
     arrayOfErrors = [];
     
-    console.log('Working');
+    console.log('Button Working');
     document.getElementById("errorP").innerHTML = 'Thinking';
     
     if(document.getElementById("textbox").innerHTML != ''){
