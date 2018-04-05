@@ -1,46 +1,100 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
-    <style type = "text/css">
-        
-        body {
-            padding: 0; margin: 0;
-            font-size: 8pt;
-        }
-        
-        .button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-        }    
-      </style>
-      
-    <script src="unmatchedBracketChecker.js"></script>
-    
-  </head>
-    
-  <body>
-      
-      <div style = "text-align: center">
-      
-          <p style = "font-size:24pt">Unmatched Brackets Checker</p>
-          
-          <textarea rows="20" cols = "100" id="textbox" style = "font-size: 8pt" onclick = "this.select()">Enter your code here, on separate lines</textarea>
-          <p></p>
-          
-          <button class = "button" onclick = "checkForUnmatchedBrackets()">Find Unmatched Brackets</button>
-          
-          <p></p>
-          
-          <p id="errorP" style = "font-size: 12pt"></p>
-          
-      </div>
-      
-  </body>
+    <head>
+        <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+        <style type = "text/css">
+
+            body {
+                padding: 0; margin: 0;
+                font-size: 8pt;
+            }
+
+            .button {
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+            }    
+        </style>
+
+        <script type = "text/javascript" src="checkForUnmatched.js"></script>
+        <script type = "text/javascript">
+
+            function checkForUnmatchedBrackets(){
+//                console.log("Checking for Unmatched Brackets");
+
+                var errorText = "Try putting in some code...";
+                var arrayOfLines = [];
+                var arrayOfErrors = [];
+                var arrayOfLines = [];
+                var arrayOfLines = [];
+                var inputString = document.getElementById("textbox").value;
+
+
+                if(inputString != ''){
+//                    console.log("String Found");
+
+                    errorText = "No errors found";
+
+                    arrayOfLines = inputString.match(/[^\r\n]+/g);
+
+                    for(let lineNumber = 0; lineNumber < arrayOfLines.length ; lineNumber++) {
+                        
+//                        console.log("Loop started");
+
+                        let currentLine = arrayOfLines[lineNumber];
+
+                        var roundCheck = checkForUnmatched(currentLine, '(', ')');
+
+                        var squareCheck = checkForUnmatched(currentLine, '[', ']');
+
+                        var braceCheck = checkForUnmatched(currentLine, '{', '}');
+
+
+                        if(roundCheck){                                
+                            arrayOfErrors.push('Unmatched "'+roundCheck+'" on line ' + (lineNumber+1)); 
+                        }
+
+                        if(squareCheck){
+                            arrayOfErrors.push('Unmatched "'+squareCheck+'" on line ' + (lineNumber+1));  
+                        }
+
+                        if(braceCheck){
+                            arrayOfErrors.push('Unmatched "'+braceCheck+'" on line ' + (lineNumber+1)); 
+                        }
+                    }
+
+                    if(arrayOfErrors.length != 0) {
+                        errorText = "<p>"+arrayOfErrors.join(','+"</p><p>"+"</p>");
+                    }
+                }
+
+//                console.log("Made it");
+                document.getElementById("errorP").innerHTML = errorText;
+
+            }</script>
+    </head>
+
+    <body>
+
+        <div style = "text-align: center">
+
+            <p style = "font-size:24pt">Unmatched Brackets Checker</p>
+
+            <textarea rows="20" cols = "100" id="textbox" style = "font-size: 8pt" onclick = "this.select()">Enter your code here, on separate lines</textarea>
+            <p></p>
+
+            <button class = "button" onclick = "checkForUnmatchedBrackets()">Find Unmatched Brackets</button>
+
+            <p></p>
+
+            <p id="errorP" style = "font-size: 12pt"></p>
+
+        </div>
+
+    </body>
 </html>
